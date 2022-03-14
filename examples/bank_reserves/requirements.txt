@@ -1,4 +1,3 @@
-itertools
 mesa
 numpy
 pandas

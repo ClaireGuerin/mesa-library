@@ -9,18 +9,25 @@ import numpy as np
 
 from mesa import Model
 from mesa.space import ContinuousSpace
-from mesa.time import RandomActivation
+from mesa.time import BaseScheduler, RandomActivation, SimultaneousActivation
 
 from .boid import Boid
 
 
 class BoidFlockers(Model):
     """
-    Flocker model class. Handles agent creation, placement and scheduling.
+    Craig Reynolds's Boids flocker model class. Handles agent creation, placement and scheduling.
     """
+    
+    schedule_types = {
+        "Sequential": BaseScheduler,
+        "Random": RandomActivation,
+        "Simultaneous": SimultaneousActivation,
+    }
 
     def __init__(
         self,
+        schedule_type="Random",
         population=100,
         width=100,
         height=100,
@@ -47,7 +54,8 @@ class BoidFlockers(Model):
         self.vision = vision
         self.speed = speed
         self.separation = separation
-        self.schedule = RandomActivation(self)
+        self.schedule_type = schedule_type
+        self.schedule = self.schedule_types[self.schedule_type](self) # either random, sequential or simultaneous
         self.space = ContinuousSpace(width, height, True)
         self.factors = dict(cohere=cohere, separate=separate, match=match)
         self.make_agents()

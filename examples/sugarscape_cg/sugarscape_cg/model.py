@@ -19,7 +19,17 @@ from .agents import SsAgent, Sugar
 
 class SugarscapeCg(Model):
     """
-    Sugarscape 2 Constant Growback
+    Netlogo's Sugarscape 2 Constant Growback. 
+    Each patch contains some sugar, the maximum amount of which is predetermined. 
+    At each tick, each patch regains one unit of sugar, until it reaches the maximum amount. 
+    The amount of sugar a patch currently contains is indicated by its color; the darker the yellow, the more sugar.
+    At setup, agents are placed at random within the world. 
+    Each agent can only see a certain distance horizontally and vertically. 
+    At each tick, each agent will move to the nearest unoccupied location within their vision range 
+    with the most sugar, and collect all the sugar there. 
+    If its current location has as much or more sugar than any unoccupied location it can see, it will stay put. 
+    Agents also use (and thus lose) a certain amount of sugar each tick, based on their metabolism rates. 
+    If an agent runs out of sugar, it dies.
     """
 
     verbose = True  # Print-monitoring

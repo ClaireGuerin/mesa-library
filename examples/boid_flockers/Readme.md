@@ -8,7 +8,7 @@ This model tests Mesa's continuous space feature, and uses numpy arrays to repre
 
 Launch the model:
 ```
-    $ python Flocker_Server.py
+    $ python run.py
 ```
 
 Then open your browser to [http://127.0.0.1:8521/](http://127.0.0.1:8521/) and press Reset, then Run.
