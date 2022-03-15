@@ -30,4 +30,4 @@ model_params = {
     "match": UserSettableParameter("slider", name="Alignment", value=0.45, min_value=0.1, max_value=0.9, step=0.1)
 }
 
-server = ModularServer(BoidFlockers, [boid_canvas], "Boids", model_params)
+server = ModularServer(BoidFlockers, [boid_canvas, line_chart], "Boids", model_params)
