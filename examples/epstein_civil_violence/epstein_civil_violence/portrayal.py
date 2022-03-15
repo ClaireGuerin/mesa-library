@@ -1,9 +1,9 @@
 from .agent import Citizen, Cop
 
-COP_COLOR = "#000000"
-AGENT_QUIET_COLOR = "#0066CC"
-AGENT_REBEL_COLOR = "#CC0000"
-JAIL_COLOR = "#757575"
+COP_COLOR = "#000000" # cops are black dots
+AGENT_QUIET_COLOR = "#0066CC" # quiet citizens are blue
+AGENT_REBEL_COLOR = "#CC0000" # rebel citizens are red
+JAIL_COLOR = "#757575" # jailed citizens are grey
 
 
 def citizen_cop_portrayal(agent):

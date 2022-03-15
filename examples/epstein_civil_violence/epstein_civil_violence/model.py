@@ -5,13 +5,33 @@ from mesa.datacollection import DataCollector
 
 from .agent import Cop, Citizen
 
-
 class EpsteinCivilViolence(Model):
     """
-    Model 1 from "Modeling civil violence: An agent-based computational
+    Epstein Model of Civil Violence. 
+    Cops are black dots. Citizens can either be quiet (blue), rebel (red) or in jail (grey).
+    
+    Reference: Model 1 from "Modeling civil violence: An agent-based computational
     approach," by Joshua Epstein.
     http://www.pnas.org/content/99/suppl_3/7243.full
-    Attributes:
+    """
+
+    def __init__(
+        self,
+        width=40,
+        height=40,
+        citizen_density=0.7,
+        cop_density=0.074,
+        citizen_vision=7,
+        cop_vision=7,
+        legitimacy=0.8,
+        max_jail_term=1000,
+        active_threshold=0.1,
+        arrest_prob_constant=2.3,
+        movement=True,
+        max_iters=1000,
+    ):
+        """
+        Attributes:
         height: grid height
         width: grid width
         citizen_density: approximate % of cells occupied by citizens.
@@ -30,24 +50,8 @@ class EpsteinCivilViolence(Model):
         movement: binary, whether agents try to move at step end
         max_iters: model may not have a natural stopping point, so we set a
             max.
-
-    """
-
-    def __init__(
-        self,
-        width=40,
-        height=40,
-        citizen_density=0.7,
-        cop_density=0.074,
-        citizen_vision=7,
-        cop_vision=7,
-        legitimacy=0.8,
-        max_jail_term=1000,
-        active_threshold=0.1,
-        arrest_prob_constant=2.3,
-        movement=True,
-        max_iters=1000,
-    ):
+        """
+        
         super().__init__()
         self.width = width
         self.height = height
