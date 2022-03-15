@@ -102,5 +102,10 @@ class Boid(Agent):
             + self.match_heading(neighbors) * self.match_factor
         ) / 2
         self.velocity /= np.linalg.norm(self.velocity)
-        new_pos = self.pos + self.velocity * self.speed
-        self.model.space.move_agent(self, new_pos)
+        self._new_pos = self.pos + self.velocity * self.speed
+        
+        if self.model.schedule_type != "Simultaneous":
+            self.advance()
+        
+    def advance(self):
+        self.model.space.move_agent(self, self._new_pos)

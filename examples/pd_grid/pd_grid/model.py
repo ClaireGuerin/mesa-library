@@ -1,3 +1,5 @@
+import numpy as np
+
 from mesa import Model
 from mesa.time import BaseScheduler, RandomActivation, SimultaneousActivation
 from mesa.space import SingleGrid
@@ -5,9 +7,12 @@ from mesa.datacollection import DataCollector
 
 from .agent import PDAgent
 
-
+def count_cooperators(model):
+    counter = [a for a in model.schedule.agents if a.move == "C"]
+    return len(counter)
+    
 class PdGrid(Model):
-    """Model class for iterated, spatial prisoner's dilemma model."""
+    """Model class for iterated, spatial (multi-player) prisoner's dilemma model."""
 
     schedule_types = {
         "Sequential": BaseScheduler,
@@ -21,7 +26,7 @@ class PdGrid(Model):
     payoff = {("C", "C"): 1, ("C", "D"): 0, ("D", "C"): 1.6, ("D", "D"): 0}
 
     def __init__(
-        self, width=50, height=50, schedule_type="Random", payoffs=None, seed=None
+        self, width=50, height=50, schedule_type="Random", CC=None, CD=None, DC=None, DD=None, seed=None
     ):
         """
         Create a new Spatial Prisoners' Dilemma Model.
@@ -35,6 +40,12 @@ class PdGrid(Model):
         self.grid = SingleGrid(width, height, torus=True)
         self.schedule_type = schedule_type
         self.schedule = self.schedule_types[self.schedule_type](self)
+        
+        if np.all(np.array([CC,CD,DC,DD]) > 0):
+            self.payoff = {("C", "C"): CC, 
+                           ("C", "D"): CD, 
+                           ("D", "C"): DC, 
+                           ("D", "D"): DD}
 
         # Create agents
         for x in range(width):
@@ -45,9 +56,8 @@ class PdGrid(Model):
 
         self.datacollector = DataCollector(
             {
-                "Cooperating_Agents": lambda m: len(
-                    [a for a in m.schedule.agents if a.move == "C"]
-                )
+                "Cooperating Agents": count_cooperators,
+                "Defecting Agents": lambda m: width*height - count_cooperators(m)
             }
         )
 

@@ -14,5 +14,5 @@ def portrayPDAgent(agent):
         "Layer": 0,
         "x": agent.pos[0],
         "y": agent.pos[1],
-        "Color": "blue" if agent.isCooroperating else "red",
+        "Color": "yellow" if agent.isCooroperating else "purple",
     }
