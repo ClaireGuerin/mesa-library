@@ -9,10 +9,18 @@ import numpy as np
 
 from mesa import Model
 from mesa.space import ContinuousSpace
+from mesa.datacollection import DataCollector
 from mesa.time import BaseScheduler, RandomActivation, SimultaneousActivation
 
 from .boid import Boid
 
+def get_average_speed(model):
+    """average speed of all agents (boids)"""
+    
+    boid_speeds = [boid.velocity for boid in model.schedule.agents]
+    # return the average agent (boid) speed
+    return np.mean(boid_speeds)
+    
 
 class BoidFlockers(Model):
     """
@@ -60,6 +68,10 @@ class BoidFlockers(Model):
         self.factors = dict(cohere=cohere, separate=separate, match=match)
         self.make_agents()
         self.running = True
+        self.datacollector = DataCollector(
+            model_reporters={"Speed": get_average_speed}
+        )
+        self.datacollector.collect(self)
 
     def make_agents(self):
         """
@@ -85,3 +97,4 @@ class BoidFlockers(Model):
 
     def step(self):
         self.schedule.step()
+        self.datacollector.collect(self)
