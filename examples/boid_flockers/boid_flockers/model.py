@@ -24,7 +24,7 @@ def get_average_speed(model):
 
 class BoidFlockers(Model):
     """
-    Craig Reynolds's Boids flocker model class. Handles agent creation, placement and scheduling.
+    Craig Reynolds's Boids flocker model class.
     """
     
     schedule_types = {
