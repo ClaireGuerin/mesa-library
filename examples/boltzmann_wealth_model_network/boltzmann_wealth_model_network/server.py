@@ -13,7 +13,7 @@ def network_portrayal(G):
         {
             "id": node_id,
             "size": 3 if agents else 1,
-            "color": "#CC0000" if not agents or agents[0].wealth == 0 else "#007959",
+            "color": "#66c2a5" if not agents or agents[0].wealth == 0 else "#e7298a",
             "label": None
             if not agents
             else f"Agent:{agents[0].unique_id} Wealth:{agents[0].wealth}",
@@ -31,7 +31,7 @@ def network_portrayal(G):
 
 grid = NetworkModule(network_portrayal, 500, 500, library="sigma")
 chart = ChartModule(
-    [{"Label": "Gini", "Color": "Black"}], data_collector_name="datacollector"
+    [{"Label": "Gini Coefficient", "Color": "Black"}], data_collector_name="datacollector"
 )
 
 model_params = {

@@ -16,8 +16,9 @@ class BoltzmannWealthModel(Model):
     """A simple model of an economy where agents exchange currency at random.
 
     All the agents begin with one unit of currency, and each time step can give
-    a unit of currency to another agent. Note how, over time, this produces a
-    highly skewed distribution of wealth.
+    a unit of currency to another agent. 
+    Agents with a positive wealth are large pink dots, while those with no wealth are small green dots.
+    Note how, over time, this produces a highly skewed distribution of wealth.
     """
 
     def __init__(self, N=100, width=10, height=10):
@@ -25,7 +26,7 @@ class BoltzmannWealthModel(Model):
         self.grid = MultiGrid(width, height, True)
         self.schedule = RandomActivation(self)
         self.datacollector = DataCollector(
-            model_reporters={"Gini": compute_gini}, agent_reporters={"Wealth": "wealth"}
+            model_reporters={"Gini Coefficient": compute_gini}, agent_reporters={"Wealth": "wealth"}
         )
         # Create agents
         for i in range(self.num_agents):

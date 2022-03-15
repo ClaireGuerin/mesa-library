@@ -24,7 +24,13 @@ def get_average_speed(model):
 
 class BoidFlockers(Model):
     """
-    Craig Reynolds's Boids flocker model class.
+    This model is an implementation of Craig Reynolds's Boids flocker model. 
+    Boids is an example of emergent behavior, such that the complexity of Boids arises from 
+    the interaction of individual agents (the boids, in this case) adhering to a set of simple rules. 
+    The rules applied in the simplest Boids world are as three-fold:
+    **separation**: steer to avoid crowding local flockmates;
+    **alignment**: steer towards the average heading of local flockmates;
+    **cohesion**: steer to move towards the average position (center of mass) of local flockmates.
     """
     
     schedule_types = {
@@ -69,7 +75,7 @@ class BoidFlockers(Model):
         self.make_agents()
         self.running = True
         self.datacollector = DataCollector(
-            model_reporters={"Speed": get_average_speed}
+            model_reporters={"Velocity": get_average_speed}
         )
         self.datacollector.collect(self)
 

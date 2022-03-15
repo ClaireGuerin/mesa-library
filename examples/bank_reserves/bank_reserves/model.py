@@ -84,7 +84,7 @@ def get_total_loans(model):
 
 class BankReserves(Model):
     """
-    This model is a Mesa implementation of the Bank Reserves model from NetLogo.
+    This model is an implementation of the Bank Reserves model from NetLogo.
     It is a highly abstracted, simplified model of an economy, with only one
     type of agent and a single bank representing all banks in an economy. People
     (represented by circles) move randomly within the grid. If two or more people

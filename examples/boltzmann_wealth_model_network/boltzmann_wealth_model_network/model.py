@@ -15,7 +15,13 @@ def compute_gini(model):
 
 
 class BoltzmannWealthModelNetwork(Model):
-    """A model with some number of agents."""
+    """A simple model of an economy where agents exchange currency at random, represented as a network.
+
+    All the agents begin with one unit of currency, and each time step can give
+    a unit of currency to another agent. 
+    Nodes of agents with a positive wealth are large pink dots, 
+    while those with no wealth, or no agents are small green dots.
+    Note how, over time, this produces a highly skewed distribution of wealth."""
 
     def __init__(self, num_agents=7, num_nodes=10):
 
@@ -25,7 +31,7 @@ class BoltzmannWealthModelNetwork(Model):
         self.grid = NetworkGrid(self.G)
         self.schedule = RandomActivation(self)
         self.datacollector = DataCollector(
-            model_reporters={"Gini": compute_gini},
+            model_reporters={"Gini Coefficient": compute_gini},
             agent_reporters={"Wealth": lambda _: _.wealth},
         )
 

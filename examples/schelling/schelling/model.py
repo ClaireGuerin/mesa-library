@@ -37,7 +37,14 @@ class SchellingAgent(Agent):
 
 class Schelling(Model):
     """
-    Model class for the Schelling segregation model.
+    Schelling's model of segregation. 
+    Agents are split into two groups and occupy the spaces of the grid and only one agent can occupy a space at a time. 
+    Agents desire a fraction of their neighborhood to be from the same group. 
+    Increasing this fraction corresponds to increasing the agent's intolerance of outsiders.
+    Each round consists of agents checking their neighborhood to see if the fraction of neighbors 
+    that matches their group is greater than or equal to their preferred fraction. 
+    If not, then the agent will choose to relocate to a vacant spot. 
+    This continues until every agent is satisfied.
     """
 
     def __init__(self, width=20, height=20, density=0.8, minority_pc=0.2, homophily=3):

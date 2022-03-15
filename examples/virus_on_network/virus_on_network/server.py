@@ -7,13 +7,16 @@ from mesa.visualization.modules import NetworkModule
 from mesa.visualization.modules import TextElement
 from .model import VirusOnNetwork, State, number_infected
 
+SUSCEPTIBLE_COLOR = "#7570b3"
+INFECTED_COLOR = "#d95f02"
+RESISTANT_COLOR = "#1b9e77"
 
 def network_portrayal(G):
     # The model ensures there is always 1 agent per node
 
     def node_color(agent):
-        return {State.INFECTED: "#FF0000", State.SUSCEPTIBLE: "#008000"}.get(
-            agent.state, "#808080"
+        return {State.INFECTED: INFECTED_COLOR, State.SUSCEPTIBLE: SUSCEPTIBLE_COLOR}.get(
+            agent.state, RESISTANT_COLOR
         )
 
     def edge_color(agent1, agent2):
@@ -55,9 +58,9 @@ def network_portrayal(G):
 network = NetworkModule(network_portrayal, 500, 500, library="d3")
 chart = ChartModule(
     [
-        {"Label": "Infected", "Color": "#FF0000"},
-        {"Label": "Susceptible", "Color": "#008000"},
-        {"Label": "Resistant", "Color": "#808080"},
+        {"Label": "Infected", "Color": INFECTED_COLOR},
+        {"Label": "Susceptible", "Color": SUSCEPTIBLE_COLOR},
+        {"Label": "Resistant", "Color": RESISTANT_COLOR},
     ]
 )
 

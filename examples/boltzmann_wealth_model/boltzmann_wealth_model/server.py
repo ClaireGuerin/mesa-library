@@ -10,10 +10,10 @@ def agent_portrayal(agent):
     portrayal = {"Shape": "circle", "Filled": "true", "r": 0.5}
 
     if agent.wealth > 0:
-        portrayal["Color"] = "red"
+        portrayal["Color"] = "#e7298a"
         portrayal["Layer"] = 0
     else:
-        portrayal["Color"] = "grey"
+        portrayal["Color"] = "#66c2a5"
         portrayal["Layer"] = 1
         portrayal["r"] = 0.2
     return portrayal
@@ -21,7 +21,7 @@ def agent_portrayal(agent):
 
 grid = CanvasGrid(agent_portrayal, 10, 10, 500, 500)
 chart = ChartModule(
-    [{"Label": "Gini", "Color": "#0000FF"}], data_collector_name="datacollector"
+    [{"Label": "Gini Coefficient", "Color": "Black"}], data_collector_name="datacollector"
 )
 
 model_params = {

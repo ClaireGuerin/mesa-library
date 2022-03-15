@@ -31,7 +31,7 @@ def number_resistant(model):
 
 
 class VirusOnNetwork(Model):
-    """A virus model with some number of agents"""
+    """A SIR virus model with some number of agents. SRI stands for (S)usceptible, (I)nfected, (R)esistant."""
 
     def __init__(
         self,

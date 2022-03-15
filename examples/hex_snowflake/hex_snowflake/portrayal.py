@@ -13,5 +13,5 @@ def portrayCell(cell):
         "Layer": 0,
         "x": cell.x,
         "y": cell.y,
-        "Color": "black" if cell.isAlive else "white",
+        "Color": "teal" if cell.isAlive else "white",
     }

@@ -9,6 +9,7 @@ class EpsteinCivilViolence(Model):
     """
     Epstein Model of Civil Violence. 
     Cops are black dots. Citizens can either be quiet (blue), rebel (red) or in jail (grey).
+    NB: Cops density + citizen density < 1!
     
     Reference: Model 1 from "Modeling civil violence: An agent-based computational
     approach," by Joshua Epstein.

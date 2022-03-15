@@ -50,7 +50,7 @@ class SugarscapeCg(Model):
         self.schedule = RandomActivationByType(self)
         self.grid = MultiGrid(self.width, self.height, torus=False)
         self.datacollector = DataCollector(
-            {"SsAgent": lambda m: m.schedule.get_type_count(SsAgent)}
+            {"Number of Agents": lambda m: m.schedule.get_type_count(SsAgent)}
         )
 
         # Create sugar

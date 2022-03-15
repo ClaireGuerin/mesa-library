@@ -2,7 +2,7 @@ from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import CanvasGrid, ChartModule, TextElement
 from mesa.visualization.UserParam import UserSettableParameter
 
-from model import Schelling
+from .model import Schelling
 
 
 class HappyElement(TextElement):
@@ -26,11 +26,11 @@ def schelling_draw(agent):
     portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true", "Layer": 0}
 
     if agent.type == 0:
-        portrayal["Color"] = ["#FF0000", "#FF9999"]
-        portrayal["stroke_color"] = "#00FF00"
+        portrayal["Color"] = ["#fc8d62", "#d95f02"]
+        #portrayal["stroke_color"] = "#00FF00"
     else:
-        portrayal["Color"] = ["#0000FF", "#9999FF"]
-        portrayal["stroke_color"] = "#000000"
+        portrayal["Color"] = ["#1b9e77", "#66c2a5"]
+        #portrayal["stroke_color"] = "#000000"
     return portrayal
 
 

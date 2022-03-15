@@ -17,12 +17,10 @@ Accessed on: November 2, 2017
 Author of original code: Taylor Mutch
 """
 
-# Green
-RICH_COLOR = "#46FF33"
-# Red
-POOR_COLOR = "#FF3C33"
-# Blue
-MID_COLOR = "#3349FF"
+# Color code for agent types
+RICH_COLOR = "#1b9e77"
+POOR_COLOR = "#d95f02"
+MID_COLOR = "#7570b3"
 
 
 def person_portrayal(agent):

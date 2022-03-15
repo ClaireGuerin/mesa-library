@@ -7,9 +7,9 @@ from .agent import Citizen, Cop
 
 
 COP_COLOR = "#000000"
-AGENT_QUIET_COLOR = "#0066CC"
-AGENT_REBEL_COLOR = "#CC0000"
-JAIL_COLOR = "#757575"
+AGENT_QUIET_COLOR = "#1b9e77"
+AGENT_REBEL_COLOR = "#d95f02"
+JAIL_COLOR = "#7570b3"
 
 
 def citizen_cop_portrayal(agent):
@@ -28,12 +28,14 @@ def citizen_cop_portrayal(agent):
             AGENT_QUIET_COLOR if agent.condition == "Quiescent" else AGENT_REBEL_COLOR
         )
         color = JAIL_COLOR if agent.jail_sentence else color
+        #portrayal["Shape"] = "circle"
         portrayal["Color"] = color
         portrayal["r"] = 0.8
         portrayal["Layer"] = 0
 
     elif type(agent) is Cop:
         portrayal["Color"] = COP_COLOR
+        #portrayal["Shape"] = "rect"
         portrayal["r"] = 0.5
         portrayal["Layer"] = 1
     return portrayal

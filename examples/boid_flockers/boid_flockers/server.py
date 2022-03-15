@@ -5,11 +5,11 @@ from .SimpleContinuousModule import SimpleCanvas
 from mesa.visualization.modules import ChartModule
 from mesa.visualization.UserParam import UserSettableParameter
 
-line_chart = ChartModule([{"Label": "Speed", "Color": "Black"}], 
+line_chart = ChartModule([{"Label": "Velocity", "Color": "Teal"}], 
                          data_collector_name="datacollector")
 
 def boid_draw(agent):
-    return {"Shape": "circle", "r": 2, "Filled": "true", "Color": "Red"}
+    return {"Shape": "circle", "r": 2, "Filled": "true", "Color": "Teal"}
 
 boid_canvas = SimpleCanvas(boid_draw, 500, 500)
 model_params = {
