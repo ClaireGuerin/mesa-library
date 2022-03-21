@@ -4,7 +4,7 @@ ModularServer
 
 A visualization server which renders a model via one or more elements.
 
-The concept for the modular visualization server as follows:
+The concept for the modular visualization server is as follows:
 A visualization is composed of VisualizationElements, each of which defines how
 to generate some visualization from a model instance and render it on the
 client. VisualizationElements may be anything from a simple text display to
@@ -29,7 +29,7 @@ ModularServer: The overall visualization application class which stores and
 
 ModularServer should *not* need to be subclassed on a model-by-model basis; it
 should be primarily a pass-through for VisualizationElement subclasses, which
-define the actual visualization specifics.
+defines the actual visualization specifics.
 
 For example, suppose we have created two visualization elements for our model,
 called canvasvis and graphvis; we would launch a server with:
@@ -262,6 +262,9 @@ class ModularServer(tornado.web.Application):
     ):
         """Create a new visualization server with the given elements."""
         # Prep visualization elements:
+        visualization_types = [type(x).__name__ for x in visualization_elements] # type of vis element
+        self.canvas_id = visualization_types.index("CanvasGrid") # find canvas element
+        self.canvas = visualization_elements.pop(self.canvas_id) # keep only chart elements in visualization_elements, store canvas
         self.visualization_elements = visualization_elements
         self.package_includes = set()
         self.local_includes = set()
