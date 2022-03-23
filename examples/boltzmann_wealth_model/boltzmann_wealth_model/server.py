@@ -7,7 +7,15 @@ from mesa.visualization.UserParam import UserSettableParameter
 
 
 def agent_portrayal(agent):
-    portrayal = {"Shape": "circle", "Filled": "true", "r": 0.5}
+    portrayal = {"Filled": "true"}
+    
+    if agent.selected:
+        portrayal["Shape"] = "rect"
+        portrayal["h"] = 0.5
+        portrayal["w"] = 0.5
+    else:
+        portrayal["Shape"] = "circle"
+        portrayal["r"] = 0.5
 
     if agent.wealth > 0:
         portrayal["Color"] = "#e7298a"
@@ -36,6 +44,14 @@ model_params = {
     ),
     "width": 10,
     "height": 10,
+    "select": UserSettableParameter(
+        "number",
+        "Select agent",
+        0,
+        0,
+        200,
+        1
+    )
 }
 
 server = ModularServer(BoltzmannWealthModel, [grid, chart], "Money Model", model_params)

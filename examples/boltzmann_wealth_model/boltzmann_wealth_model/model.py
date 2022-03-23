@@ -21,16 +21,17 @@ class BoltzmannWealthModel(Model):
     Note how, over time, this produces a highly skewed distribution of wealth.
     """
 
-    def __init__(self, N=100, width=10, height=10):
+    def __init__(self, N=100, width=10, height=10, select=None):
         self.num_agents = N
         self.grid = MultiGrid(width, height, True)
         self.schedule = RandomActivation(self)
         self.datacollector = DataCollector(
             model_reporters={"Gini Coefficient": compute_gini}, agent_reporters={"Wealth": "wealth"}
         )
+        self.select = select
         # Create agents
         for i in range(self.num_agents):
-            a = MoneyAgent(i, self)
+            a = MoneyAgent(i, self, i==select)
             self.schedule.add(a)
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
@@ -53,9 +54,10 @@ class BoltzmannWealthModel(Model):
 class MoneyAgent(Agent):
     """An agent with fixed initial wealth."""
 
-    def __init__(self, unique_id, model):
+    def __init__(self, unique_id, model, selected=False):
         super().__init__(unique_id, model)
         self.wealth = 1
+        self.selected = selected
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(
