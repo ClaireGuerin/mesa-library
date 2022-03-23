@@ -16,6 +16,7 @@ Author of original code: Taylor Mutch
 RICH_COLOR = "#1b9e77"
 POOR_COLOR = "#d95f02"
 MID_COLOR = "#7570b3"
+SELECT_COLOR = "#000000"
 
 
 def person_portrayal(agent):
@@ -26,10 +27,17 @@ def person_portrayal(agent):
 
     # update portrayal characteristics for each Person object
     if isinstance(agent, Person):
-        portrayal["Shape"] = "circle"
-        portrayal["r"] = 0.5
-        portrayal["Layer"] = 0
-        portrayal["Filled"] = "true"
+        if(agent.selected):
+            portrayal["Shape"] = "rect"
+            portrayal["w"] = 0.8
+            portrayal["h"] = 0.8
+            portrayal["Layer"] = 1
+            portrayal["Filled"] = "false"
+        else:            
+            portrayal["Shape"] = "circle"
+            portrayal["r"] = 0.5
+            portrayal["Layer"] = 0
+            portrayal["Filled"] = "false"
 
         color = MID_COLOR
 
@@ -66,6 +74,14 @@ model_params = {
         1,
         100,
         description="Percent of deposits the bank has to hold in reserve",
+    ),
+    "select": UserSettableParameter(
+        "number",
+        "Follow individual",
+        0,
+        0,
+        200,
+        1
     ),
 }
 

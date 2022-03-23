@@ -115,6 +115,7 @@ class BankReserves(Model):
         init_people=2,
         rich_threshold=10,
         reserve_percent=50,
+        select=None,
     ):
         self.height = height
         self.width = width
@@ -146,7 +147,7 @@ class BankReserves(Model):
             # set x, y coords randomly within the grid
             x = self.random.randrange(self.width)
             y = self.random.randrange(self.height)
-            p = Person(i, (x, y), self, True, self.bank, self.rich_threshold)
+            p = Person(i, (x, y), self, True, self.bank, self.rich_threshold, i == select)
             # place the Person object on the grid at coordinates (x, y)
             self.grid.place_agent(p, (x, y))
             # add the Person object to the model schedule
