@@ -23,7 +23,14 @@ def schelling_draw(agent):
     """
     if agent is None:
         return
-    portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true", "Layer": 0}
+    
+    portrayal = {"Shape": "rect" if agent.selected else "circle", 
+                 "r": 0.5, 
+                 "h": 0.8,
+                 "w": 0.8,
+                 "Filled": "true", 
+                 "Layer": 0}
+    #,"stroke_color": "#000000" if agent.selected else "#ffffff"
 
     if agent.type == 0:
         portrayal["Color"] = ["#fc8d62", "#d95f02"]
@@ -46,6 +53,13 @@ model_params = {
         "slider", "Fraction minority", 0.2, 0.00, 1.0, 0.05
     ),
     "homophily": UserSettableParameter("slider", "Homophily", 3, 0, 8, 1),
+    "select": UserSettableParameter(
+        "number",
+        "Select agent",
+        0,
+        0,
+        200,
+        1)
 }
 
 server = ModularServer(

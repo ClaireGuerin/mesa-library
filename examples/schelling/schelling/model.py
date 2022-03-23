@@ -47,7 +47,7 @@ class Schelling(Model):
     This continues until every agent is satisfied.
     """
 
-    def __init__(self, width=20, height=20, density=0.8, minority_pc=0.2, homophily=3):
+    def __init__(self, width=20, height=20, density=0.8, minority_pc=0.2, homophily=3, select=None):
         """ """
 
         self.width = width
@@ -55,6 +55,7 @@ class Schelling(Model):
         self.density = density
         self.minority_pc = minority_pc
         self.homophily = homophily
+        self.select = select
 
         self.schedule = RandomActivation(self)
         self.grid = SingleGrid(width, height, torus=True)
@@ -70,6 +71,7 @@ class Schelling(Model):
         # We use a grid iterator that returns
         # the coordinates of a cell as well as
         # its contents. (coord_iter)
+        unique_id = 0
         for cell in self.grid.coord_iter():
             x = cell[1]
             y = cell[2]
@@ -80,8 +82,10 @@ class Schelling(Model):
                     agent_type = 0
 
                 agent = SchellingAgent((x, y), self, agent_type)
+                agent.selected = unique_id == self.select
                 self.grid.position_agent(agent, (x, y))
                 self.schedule.add(agent)
+                unique_id += 1
 
         self.running = True
         self.datacollector.collect(self)
