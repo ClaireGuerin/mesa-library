@@ -263,8 +263,8 @@ class ModularServer(tornado.web.Application):
         """Create a new visualization server with the given elements."""
         # Prep visualization elements:
         visualization_types = [type(x).__name__ for x in visualization_elements] # type of vis element
-        self.canvas_id = visualization_types.index("CanvasGrid") # find canvas element
-        self.canvas = visualization_elements.pop(self.canvas_id) # keep only chart elements in visualization_elements, store canvas
+        #self.canvas_id = visualization_types.index("CanvasGrid") # find canvas element
+        #self.canvas = visualization_elements.pop(self.canvas_id) # keep only chart elements in visualization_elements, store canvas
         self.visualization_elements = visualization_elements
         self.package_includes = set()
         self.local_includes = set()
