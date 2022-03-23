@@ -94,13 +94,13 @@ class BoidFlockers(Model):
                 i,
                 self,
                 pos,
-                i==self.select,
                 self.speed,
                 velocity,
                 self.vision,
                 self.separation,
                 **self.factors,
             )
+            boid.selected = i==self.select
             self.space.place_agent(boid, pos)
             self.schedule.add(boid)
 

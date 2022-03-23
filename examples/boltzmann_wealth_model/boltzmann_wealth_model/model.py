@@ -31,7 +31,8 @@ class BoltzmannWealthModel(Model):
         self.select = select
         # Create agents
         for i in range(self.num_agents):
-            a = MoneyAgent(i, self, i==select)
+            a = MoneyAgent(i, self)
+            a.selected = i==select
             self.schedule.add(a)
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
@@ -54,10 +55,9 @@ class BoltzmannWealthModel(Model):
 class MoneyAgent(Agent):
     """An agent with fixed initial wealth."""
 
-    def __init__(self, unique_id, model, selected=False):
+    def __init__(self, unique_id, model):
         super().__init__(unique_id, model)
         self.wealth = 1
-        self.selected = selected
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(

@@ -95,8 +95,8 @@ class EpsteinCivilViolence(Model):
                 cop = Cop(unique_id, 
                           self, 
                           (x, y), 
-                          vision=self.cop_vision, 
-                          selected=unique_id==self.select)
+                          vision=self.cop_vision)
+                cop.selected = unique_id==self.select
                 unique_id += 1
                 self.grid[y][x] = cop
                 self.schedule.add(cop)
@@ -109,9 +109,9 @@ class EpsteinCivilViolence(Model):
                     regime_legitimacy=self.legitimacy,
                     risk_aversion=self.random.random(),
                     threshold=self.active_threshold,
-                    vision=self.citizen_vision,
-                    selected=unique_id==self.select
+                    vision=self.citizen_vision
                 )
+                citizen.selected = unique_id==self.select
                 unique_id += 1
                 self.grid[y][x] = citizen
                 self.schedule.add(citizen)

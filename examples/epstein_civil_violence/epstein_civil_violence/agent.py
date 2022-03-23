@@ -38,8 +38,7 @@ class Citizen(Agent):
         regime_legitimacy,
         risk_aversion,
         threshold,
-        vision,
-        selected = False
+        vision
     ):
         """
         Create a new Citizen.
@@ -69,7 +68,6 @@ class Citizen(Agent):
         self.jail_sentence = 0
         self.grievance = self.hardship * (1 - self.regime_legitimacy)
         self.arrest_probability = None
-        self.selected = False
 
     def step(self):
         """
@@ -138,7 +136,7 @@ class Cop(Agent):
             able to inspect
     """
 
-    def __init__(self, unique_id, model, pos, vision, selected=False):
+    def __init__(self, unique_id, model, pos, vision):
         """
         Create a new Cop.
         Args:
@@ -152,7 +150,6 @@ class Cop(Agent):
         self.breed = "cop"
         self.pos = pos
         self.vision = vision
-        self.selected = selected
 
     def step(self):
         """
