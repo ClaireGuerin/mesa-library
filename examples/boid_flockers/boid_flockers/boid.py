@@ -23,6 +23,7 @@ class Boid(Agent):
         unique_id,
         model,
         pos,
+        selected,
         speed,
         velocity,
         vision,
@@ -55,6 +56,7 @@ class Boid(Agent):
         self.cohere_factor = cohere
         self.separate_factor = separate
         self.match_factor = match
+        self.selected = selected
 
     def cohere(self, neighbors):
         """

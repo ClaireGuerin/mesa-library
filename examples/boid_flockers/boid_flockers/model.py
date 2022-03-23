@@ -51,6 +51,7 @@ class BoidFlockers(Model):
         cohere=0.025,
         separate=0.25,
         match=0.04,
+        select=None,
     ):
         """
         Create a new Flockers model.
@@ -72,6 +73,7 @@ class BoidFlockers(Model):
         self.schedule = self.schedule_types[self.schedule_type](self) # either random, sequential or simultaneous
         self.space = ContinuousSpace(width, height, True)
         self.factors = dict(cohere=cohere, separate=separate, match=match)
+        self.select = select
         self.make_agents()
         self.running = True
         self.datacollector = DataCollector(
@@ -92,11 +94,12 @@ class BoidFlockers(Model):
                 i,
                 self,
                 pos,
+                i==self.select,
                 self.speed,
                 velocity,
                 self.vision,
                 self.separation,
-                **self.factors
+                **self.factors,
             )
             self.space.place_agent(boid, pos)
             self.schedule.add(boid)

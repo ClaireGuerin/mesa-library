@@ -9,7 +9,21 @@ line_chart = ChartModule([{"Label": "Velocity", "Color": "Teal"}],
                          data_collector_name="datacollector")
 
 def boid_draw(agent):
-    return {"Shape": "circle", "r": 2, "Filled": "true", "Color": "Teal"}
+    portrayal = {}
+    
+    if agent.selected:
+        portrayal["Shape"] = "rect"
+        portrayal["h"] = 0.02
+        portrayal["w"] = 0.02
+        portrayal["Filled"] = "false"
+        portrayal["Color"] = "DarkSlateGray"
+    else:
+        portrayal["Shape"] = "circle"
+        portrayal["r"] = 2
+        portrayal["Filled"] = "true"
+        portrayal["Color"] = "Teal"
+        
+    return portrayal
 
 boid_canvas = SimpleCanvas(boid_draw, 500, 500)
 model_params = {
@@ -27,7 +41,8 @@ model_params = {
     "separation": 2,
     "cohere": UserSettableParameter("slider", name="Cohesion", value=0.45, min_value=0.1, max_value=0.9, step=0.1),
     "separate": UserSettableParameter("slider", name="Separation", value=0.45, min_value=0.1, max_value=0.9, step=0.1),
-    "match": UserSettableParameter("slider", name="Alignment", value=0.45, min_value=0.1, max_value=0.9, step=0.1)
+    "match": UserSettableParameter("slider", name="Alignment", value=0.45, min_value=0.1, max_value=0.9, step=0.1),
+    "select": UserSettableParameter("number", "Select individual", 0, 0, 1000, 1)
 }
 
 server = ModularServer(BoidFlockers, [boid_canvas, line_chart], "Boids", model_params)
