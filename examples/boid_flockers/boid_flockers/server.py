@@ -42,7 +42,7 @@ model_params = {
     "cohere": UserSettableParameter("slider", name="Cohesion", value=0.45, min_value=0.1, max_value=0.9, step=0.1),
     "separate": UserSettableParameter("slider", name="Separation", value=0.45, min_value=0.1, max_value=0.9, step=0.1),
     "match": UserSettableParameter("slider", name="Alignment", value=0.45, min_value=0.1, max_value=0.9, step=0.1),
-    "select": UserSettableParameter("number", "Select individual", 0, 0, 1000, 1)
+    #"select": UserSettableParameter("number", "Select individual", 0, 0, 1000, 1)
 }
 
 server = ModularServer(BoidFlockers, [boid_canvas, line_chart], "Boids", model_params)
