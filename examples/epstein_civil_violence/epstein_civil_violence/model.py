@@ -30,6 +30,7 @@ class EpsteinCivilViolence(Model):
         arrest_prob_constant=2.3,
         movement=True,
         max_iters=1000,
+        select=None
     ):
         """
         Attributes:
@@ -69,6 +70,7 @@ class EpsteinCivilViolence(Model):
         self.iteration = 0
         self.schedule = RandomActivation(self)
         self.grid = Grid(width, height, torus=True)
+        self.select = select
         model_reporters = {
             "Quiescent": lambda m: self.count_type_citizens(m, "Quiescent"),
             "Active": lambda m: self.count_type_citizens(m, "Active"),
@@ -90,7 +92,11 @@ class EpsteinCivilViolence(Model):
             raise ValueError("Cop density + citizen density must be less than 1")
         for (contents, x, y) in self.grid.coord_iter():
             if self.random.random() < self.cop_density:
-                cop = Cop(unique_id, self, (x, y), vision=self.cop_vision)
+                cop = Cop(unique_id, 
+                          self, 
+                          (x, y), 
+                          vision=self.cop_vision, 
+                          selected=unique_id==self.select)
                 unique_id += 1
                 self.grid[y][x] = cop
                 self.schedule.add(cop)
@@ -104,6 +110,7 @@ class EpsteinCivilViolence(Model):
                     risk_aversion=self.random.random(),
                     threshold=self.active_threshold,
                     vision=self.citizen_vision,
+                    selected=unique_id==self.select
                 )
                 unique_id += 1
                 self.grid[y][x] = citizen

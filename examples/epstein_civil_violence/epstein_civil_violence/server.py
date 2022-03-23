@@ -11,13 +11,16 @@ AGENT_QUIET_COLOR = "#1b9e77"
 AGENT_REBEL_COLOR = "#d95f02"
 JAIL_COLOR = "#7570b3"
 
+COP_SIZE = 0.5
+CITIZEN_SIZE = 0.8
+
 
 def citizen_cop_portrayal(agent):
     if agent is None:
         return
 
     portrayal = {
-        "Shape": "circle",
+        "Shape": "rect" if agent.selected else "circle",
         "x": agent.pos[0],
         "y": agent.pos[1],
         "Filled": "true",
@@ -30,13 +33,17 @@ def citizen_cop_portrayal(agent):
         color = JAIL_COLOR if agent.jail_sentence else color
         #portrayal["Shape"] = "circle"
         portrayal["Color"] = color
-        portrayal["r"] = 0.8
+        portrayal["r"] = CITIZEN_SIZE
+        portrayal["h"] = CITIZEN_SIZE
+        portrayal["w"] = CITIZEN_SIZE
         portrayal["Layer"] = 0
 
     elif type(agent) is Cop:
         portrayal["Color"] = COP_COLOR
         #portrayal["Shape"] = "rect"
-        portrayal["r"] = 0.5
+        portrayal["r"] = COP_SIZE
+        portrayal["h"] = COP_SIZE
+        portrayal["w"] = COP_SIZE
         portrayal["Layer"] = 1
     return portrayal
 
@@ -50,6 +57,14 @@ model_params = dict(
     cop_vision=7,
     legitimacy=0.8,
     max_jail_term=1000,
+    select=UserSettableParameter(
+        "number",
+        "Select agent",
+        0,
+        0,
+        200,
+        1
+    )
 )
 
 agent_chart = ChartModule([

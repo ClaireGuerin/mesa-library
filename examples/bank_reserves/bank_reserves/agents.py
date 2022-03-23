@@ -40,7 +40,7 @@ class Bank(Agent):
 
 # subclass of RandomWalker, which is subclass to Mesa Agent
 class Person(RandomWalker):
-    def __init__(self, unique_id, pos, model, moore, bank, rich_threshold, selected=False):
+    def __init__(self, unique_id, pos, model, moore, bank, rich_threshold):
         # init parent class with required parameters
         super().__init__(unique_id, pos, model, moore=moore)
         # the amount each person has in savings
@@ -56,7 +56,6 @@ class Person(RandomWalker):
         self.customer = 0
         # person's bank, set at __init__, all people have the same bank in this model
         self.bank = bank
-        self.selected = selected
 
     def do_business(self):
         """check if person has any savings, any money in wallet, or if the

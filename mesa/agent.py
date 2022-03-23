@@ -22,6 +22,7 @@ class Agent:
         self.unique_id = unique_id
         self.model = model
         self.pos = None
+        self.selected = False # if the agent has been selected for visual tracking
 
     def step(self) -> None:
         """A single step of the agent."""
